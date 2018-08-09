@@ -9,4 +9,8 @@ class Pcpp(object):
         self._def_macros = def_macros
 
     def run(self, script):
-        parser.parse(script)
+        tree = parser.parse(script)
+
+        lst = tree.get_del_lines(self._def_macros)
+
+        print(lst)

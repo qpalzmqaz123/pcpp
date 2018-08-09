@@ -56,5 +56,4 @@ def p_error(p):
 parser = yacc.yacc()
 
 def parse(script):
-    tree = parser.parse(script)
-    print(tree)
+    return parser.parse(script)
