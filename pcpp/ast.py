@@ -82,7 +82,7 @@ class If(Node):
         return [(start, end), ...]
         '''
         if self.var not in def_macros:
-            return []
+            return self.body.get_del_lines(def_macros)
 
         reserve_leaf = self.body if self.type == self.DEF else self.otherwise
         delete_leaf = self.body if reserve_leaf == self.otherwise else self.otherwise
