@@ -1,4 +1,4 @@
-#ifdef A
+#ifndef A
 1
 #else
 #ifndef B
