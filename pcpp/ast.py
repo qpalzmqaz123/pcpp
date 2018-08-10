@@ -104,7 +104,7 @@ class If(Node):
                 if self.elseline == None:
                     lst.append(Range(self.ifline, self.endline))
                 else:
-                    lst.append(Range(self.elseline, self.endline))
+                    lst.append(Range(self.ifline, self.elseline))
 
         return self._uniq(lst)
 
