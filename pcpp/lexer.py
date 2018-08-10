@@ -29,10 +29,13 @@ def t_COMMENT(t):
 def t_error(t):
     t.lexer.skip(1)
 
-lexer = lex.lex()
+def get_lexer():
+    return lex.lex()
 
-if __name__ == '__main__':
+def main():
     script = sys.stdin.read()
+
+    lexer = get_lexer()
 
     lexer.input(script)
 
@@ -42,3 +45,6 @@ if __name__ == '__main__':
             break
 
         print(tok)
+
+if __name__ == '__main__':
+    main()

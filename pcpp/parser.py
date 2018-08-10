@@ -54,7 +54,8 @@ def p_error(p):
     else:
         raise Exception("Syntax error")
 
-parser = yacc.yacc()
-
 def parse(script):
-    return parser.parse(script)
+    _lexer = lexer.get_lexer()
+    parser = yacc.yacc()
+
+    return parser.parse(script, lexer=_lexer)
