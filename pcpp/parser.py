@@ -28,7 +28,8 @@ def p_stmt_ifdef_endif(p):
         p[0] = p[1]
 
 def p_expr_stmt_identifer(p):
-    '''expr_stmt : IDENTIFER'''
+    '''expr_stmt : IDENTIFER
+                 | expr_stmt IDENTIFER'''
     pass
 
 def p_macro_stmt_ifdef_endif(p):
