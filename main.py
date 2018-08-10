@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import os
+import sys
 import click
 from pcpp import Pcpp
 
@@ -14,6 +15,8 @@ def main(def_macro, file):
     cpp = Pcpp(list(def_macro))
 
     res = cpp.run(script)
+
+    sys.stdout.write(res)
 
 def get_script(path):
     current_path = os.getcwd()

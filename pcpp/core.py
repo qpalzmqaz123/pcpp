@@ -13,4 +13,17 @@ class Pcpp(object):
 
         lst = tree.get_del_lines(self._def_macros)
 
-        print(lst)
+        lines = script.split('\n')
+
+        def _(x):
+            x += 1
+
+            for rg in lst:
+                if x >= rg.start and x <= rg.end:
+                    return False
+
+            return True
+
+        lines = [v for i, v in enumerate(lines) if _(i)]
+
+        return '\n'.join(lines)
