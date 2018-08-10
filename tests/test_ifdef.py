@@ -79,3 +79,27 @@ class TestIfdef(BaseTest):
         '''
         print(res)
         assert res == '\n'.join(['1', '2', '#ifdef C', '3', '4', '5', '#endif', '6', '7'])
+
+    def test_nested_ifdef(self, res):
+        '''\
+        1
+        #ifdef A
+        2
+        #ifdef B
+        3
+        #else
+        4
+        #endif
+        5
+        #else
+        6
+        #ifdef B
+        7
+        #else
+        8
+        #endif
+        9
+        #endif
+        10\
+        '''
+        assert res == '\n'.join(['1', '2', '3', '5', '10'])
