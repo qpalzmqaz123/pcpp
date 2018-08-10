@@ -13,6 +13,12 @@ class Range(object):
     def __str__(self):
         return self.__repr__()
 
+    def __lt__(self, b):
+        if self.start < b.start:
+            return True
+        else:
+            return self.end < b.end
+
 class Tree(object):
 
     def __repr__(self):
@@ -53,7 +59,7 @@ class Block(Tree):
         for x in m[1:]:
             m[0].extends(x)
 
-        return m[0]
+        return m[0] if m else m
 
 class Node(Tree):
     pass
@@ -85,5 +91,51 @@ class If(Node):
         lst = []
 
         lst.append(Range(self.ifline, self.ifline))
+        if self.elseline:
+            lst.append(Range(self.elseline, self.elseline))
+        lst.append(Range(self.endline, self.endline))
 
-        return lst
+        if reserve_leaf:
+            lst.extend(reserve_leaf.get_del_lines(def_macros))
+
+        if delete_leaf:
+            if self.type == self.DEF:
+                lst.append(Range(self.elseline, self.endline))
+            else:
+                lst.append(Range(self.ifline, self.endline))
+
+        return self._uniq(lst)
+
+    def _uniq(self, lst):
+        if not lst:
+            return lst
+
+        max_end = max([x.end for x in lst])
+
+        def is_del(x):
+            for rg in lst:
+                if x >= rg.start and x <= rg.end:
+                    return True
+
+            return False
+
+        del_map = map(is_del, range(0, max_end + 1))
+
+        rgs = []
+        state = 'wait' # wait | start
+        for index, is_del in enumerate(del_map):
+            if state == 'wait':
+                if is_del:
+                    rgs.append(Range(index, None))
+                    state = 'start'
+            elif state == 'start':
+                if is_del == False:
+                    rgs[-1].end = index - 1
+                    state = 'wait'
+            else:
+                raise Exception('Unknow state: %s' % state)
+
+        if rgs[-1].end == None:
+            rgs[-1].end = max_end
+
+        return rgs

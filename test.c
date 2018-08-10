@@ -1,5 +1,6 @@
 #ifdef A
 1
+#else
 #ifndef B
 2
 #endif
