@@ -77,7 +77,6 @@ class If(Node):
         self.elseline = elseline
         self.endline = endline
 
-    ## XXX: calc delete lines
     def get_del_lines(self, def_macros=[]):
         '''
         return [(start, end), ...]
