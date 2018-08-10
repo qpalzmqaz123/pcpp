@@ -57,7 +57,7 @@ class Block(Tree):
         m = [x for x in m if x]
 
         for x in m[1:]:
-            m[0].extends(x)
+            m[0].extend(x)
 
         return m[0] if m else m
 
