@@ -56,6 +56,6 @@ def p_error(p):
 
 def parse(script):
     _lexer = lexer.get_lexer()
-    parser = yacc.yacc()
+    parser = yacc.yacc(debug=0, outputdir="/tmp", tabmodule="pcpp")
 
     return parser.parse(script, lexer=_lexer)
