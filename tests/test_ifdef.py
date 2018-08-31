@@ -77,7 +77,6 @@ class TestIfdef(BaseTest):
         #endif
         7\
         '''
-        print(res)
         assert res == '\n'.join(['1', '2', '#ifdef C', '3', '4', '5', '#endif', '6', '7'])
 
     def test_nested_ifdef(self, res):
