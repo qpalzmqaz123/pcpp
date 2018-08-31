@@ -48,6 +48,14 @@ def p_macro_stmt_ifndef_else_endif(p):
     '''macro_stmt : IFNDEF IDENTIFER stmt_list ELSE stmt_list ENDIF'''
     p[0] = ast.If(ast.If.NDEF, p[2], p[3], p[5], p.lineno(1), p.lineno(4), p.lineno(6))
 
+def p_macro_stmt_if_endif(p):
+    '''macro_stmt : IF stmt_list ENDIF'''
+    pass
+
+def p_macro_stmt_if_else_endif(p):
+    '''macro_stmt : IF stmt_list ELSE stmt_list ENDIF'''
+    pass
+
 def p_error(p):
     if p:
         raise Exception("Syntax error at '%s' line %d column %d" % (p.value, p.lineno, p.lexpos + 1))

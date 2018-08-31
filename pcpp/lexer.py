@@ -6,13 +6,14 @@ import ply.lex as lex
 
 tokens = [
     'IDENTIFER',
-    'IFDEF', 'IFNDEF', 'ELSE', 'ENDIF',
+    'IF', 'IFDEF', 'IFNDEF', 'ELSE', 'ENDIF',
     'NEWLINE'
 ]
 
 t_IDENTIFER = r'[a-zA-Z_][a-zA-Z_0-9]*'
 
 t_IFDEF  = r'\#ifdef'
+t_IF     = r'\#if'
 t_IFNDEF = r'\#ifndef'
 t_ELSE   = r'\#else'
 t_ENDIF  = r'\#endif'
